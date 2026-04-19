@@ -1,0 +1,27 @@
+name: Daidalos
+
+on:
+  push:
+    paths:
+      - '.daidalos/spec.yml'
+  issues:
+    types: [labeled]
+
+jobs:
+  daidalos:
+    runs-on: ubuntu-latest
+    # 外部forkからのPRではSecretsが渡らない（セキュリティ担保）
+    if: github.event_name == 'push' || (github.event_name == 'issues' && github.event.label.name == 'daidalos')
+
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: meltlight/daidalos@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          daidalos_token: ${{ secrets.DAIDALOS_TOKEN }}

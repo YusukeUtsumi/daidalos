@@ -1,0 +1,13 @@
+daidalos_task:
+  type: fix
+  target: "src/auth/jwt.ts"
+
+description: |
+  JWTの有効期限チェックが機能していない。
+  ログイン後24時間経過しても認証が通り続ける。
+  `verifyToken` 関数でexp claimのチェックが抜けている。
+
+acceptance:
+  - "有効期限切れトークンで401が返ること"
+  - "有効なトークンは引き続き200が返ること"
+  - "expフィールドが存在しないトークンで401が返ること"

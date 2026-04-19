@@ -1,0 +1,34 @@
+name: 'Daidalos'
+description: 'Multi-agent development automation tool. Push spec.yml and agents build, test, and PR automatically.'
+author: 'MeltLight'
+
+branding:
+  icon: 'cpu'
+  color: 'blue'
+
+inputs:
+  anthropic_api_key:
+    description: 'Anthropic API key for Claude'
+    required: true
+  daidalos_token:
+    description: 'Daidalos subscription token'
+    required: true
+  github_token:
+    description: 'GitHub token for PR creation and issue handling'
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  pr_url:
+    description: 'URL of the created pull request'
+  status:
+    description: 'Pipeline status: success | failed | vetoed'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write

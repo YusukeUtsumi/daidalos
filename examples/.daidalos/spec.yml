@@ -1,0 +1,25 @@
+daidalos:
+  version: "1.0"
+  project: "my-todo-api"
+
+intent: |
+  ユーザーが登録・ログインできるAPIサーバー。
+  ログイン後はTodoリストを作成・編集・削除できる。
+  JWTによる認証を実装し、各ユーザーは自分のTodoのみ参照・操作できる。
+
+stack:
+  language: typescript
+  framework: hono
+  database: postgresql
+
+constraints:
+  overrides:
+    auth:
+      public_allowed:
+        - "/health"
+        - "/api/v1/auth/register"
+        - "/api/v1/auth/login"
+
+agents:
+  security_review: true
+  test_generation: true
