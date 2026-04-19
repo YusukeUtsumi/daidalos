@@ -26,9 +26,12 @@ Thumbs.db
 *.swp
 *.swo
 
-# TypeScriptビルド中間出力（nccバンドル前）
-# ※ dist/ はGitHub Actionの実行に必要なためコミット対象
+# TypeScriptビルド中間出力
 *.tsbuildinfo
+
+# dist/ の中でActionに不要なファイル（index.js と licenses.txt のみコミット対象）
+dist/**/*.d.ts
+dist/**/*.d.ts.map
 
 # デバッグ
 *.pid
